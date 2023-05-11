@@ -2,17 +2,36 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 
-from .models import Post
+from .models import Menu, Recipe, Category
+from .serializers import menu_serializer
+# from accounts.permissions import IsAdminPermission
+from rest_framework import permissions 
+from rest_framework import generics
 
 
-class PostListView(ListView):
-    model = Post
+class MenuListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = menu_serializer
     
-    def get_queryset(self) -> QuerySet[Any]:
-        pass
-    
-post_list = PostListView.as_view()
-    
+menu_list_create = MenuListCreateAPIView.as_view()
 
-def home(request):
-    return render(request, 'base.html')
+
+class MenuRetriveUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = menu_serializer
+   
+menu_update = MenuRetriveUpdate.as_view()
+
+
+class MenuRetriveDestroyAPIView(generics.RetrieveDestroyAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = menu_serializer
+
+menu_destroy = MenuRetriveDestroyAPIView.as_view()
+
+
+
+
+
+
+

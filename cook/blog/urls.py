@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import *
+from .views import menu_list_create, menu_update, menu_destroy
 
 
 urlpatterns = [
-    path('<slug:slug>/', post_list, name='post_list'),
-    path('', home, name='home'),
-    
+    path('menu-list-create/', menu_list_create, name='MenuListCreate'),
+    path('menu-update/<int:pk>/', menu_update, name='MenuUpdate'),
+    path('menu-destroy/<int:pk>/', menu_destroy, name='MenuDestroy'),
 ]
